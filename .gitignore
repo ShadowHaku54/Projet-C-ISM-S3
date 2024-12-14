@@ -1,0 +1,6 @@
+src/*.cbp
+src/*.depend
+src/*.layout
+src/bin/*
+src/obj/
+
