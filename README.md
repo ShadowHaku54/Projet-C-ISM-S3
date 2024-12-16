@@ -26,4 +26,5 @@ Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
 Ce projet a été développé par **[STO~ShadowHaku54](https://github.com/ShadowHaku54)**.
 - 📧 **Email  :** [salimouedz@gmail.com](mailto:salimouedz@gmail.com)
 - 📂 **GitHub :** [github.com/ShadowHaku54](https://github.com/ShadowHaku54)
+
 Projet réalisé dans le cadre de l'examen en C - ISM S3 - 2024
