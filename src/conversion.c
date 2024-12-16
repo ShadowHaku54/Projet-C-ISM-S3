@@ -3,15 +3,22 @@
 #include "conversion.h"
 #include "checks.h"
 #include "inverseChaine.h"
+#include "allouage_dynamique_str.h"
 
-#define MAX_CHAR 70
+
+int check_car_in_base(char c, int b)
+{
+    int decimal = convertir_car_en_decimal(c);
+    if (decimal == -1 || decimal >= b){
+        return 0;
+    }
+    return 1;
+}
 
 int checkBase(char *number, int base)
 {
-    int decimal;
     for (int i = 0; number[i] != '\0'; i++){
-        decimal = convertir_car_en_decimal(number[i]);
-        if(decimal== -1 || decimal>=base){
+        if (!check_car_in_base(number[i], base)){
             return 0;
         }
     }
@@ -40,24 +47,25 @@ char convertir_decimal_en_car(int decimal)
     return decimal - 10 + 65;
 }
 
-int convertBaseQtoDecimal(int bq, char *number)
+int convert_baseQ_to_decimal(int bq, char *number)
 {
     int decimal = 0;
     int N = strlen(number);
     int puissbq = 1;
     for(int i=N-1; i>=0; i--){
         int dec_equiv = convertir_car_en_decimal(number[i]);
-        printf("%c %d %d\n", number[i], i, dec_equiv);
         decimal += dec_equiv * puissbq;
         puissbq *= bq;
+        printf("%c %d %d %d\n", number[i], dec_equiv, decimal, puissbq);
     }
 
     return decimal;
 }
 
-char* convertDecimaltoBaseQ(int bq, int decimal)
+char* convert_decimal_to_baseQ(int bq, int decimal, size_t max_size)
 {
-    static char number[MAX_CHAR];
+    char *number = NULL;
+    alloue_str(&number, max_size);
 
     int i = 0;
     while(decimal != 0){

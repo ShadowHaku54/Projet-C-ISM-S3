@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include<locale.h> // affiche les cractères spréciaux sur le terminal
+#include <stdlib.h>
+#include <locale.h> // affiche les cractères spréciaux sur le terminal
 // LES MENUS
 #include "menu_main.h"
 #include "menu_codage.h"
@@ -8,6 +9,7 @@
 #include "menu_transcodage.h"
 
 #include "conversion.h"
+#include "input.h"
 
 // FONCTIONNALITES AFFICHAGE
 #include "display_menu.h"
@@ -43,10 +45,18 @@ int main()
 //
 //    } while (choixP != TailleMenuMain+1);
 
-    char nbr[] = "A45B96";
-    int decimal = 10771350;
-    int bq = 8;
-    printf("%d en decimal vaut %s en base %d\n", decimal, convertDecimaltoBaseQ(bq, decimal), bq);
+//    char nbr[] = "A45B96";
+//    char *decimal_car = "10771350";
+//    int bq = 8;
+//    int decimal = convert_baseQ_to_decimal(10, decimal_car);
+//    char *octal = convert_decimal_to_baseQ(bq, decimal, strlen(decimal_car));
+//    printf("%s en decimal vaut %d en base 10\n", decimal_car, decimal);
+//    printf("%d en decimal vaut %s en base %d\n", decimal, octal, bq);
+//    libere_alloue(octal);
+
+    char *test = input("Entrer un nombre :");
+    puts(test);
+
 
     return 0;
 }

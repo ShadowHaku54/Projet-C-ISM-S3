@@ -6,4 +6,4 @@ const char *Menu_Main[] = {
     "transcodage",
 };
 
-const int TailleMenuMain = 3;
+const int TailleMenuMain = sizeof(Menu_Main) / sizeof(Menu_Main[0]);

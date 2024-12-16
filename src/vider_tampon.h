@@ -1,0 +1,3 @@
+#ifndef VIDER_TAMPON_H
+#define VIDER_TAMPON_H
+#endif // VIDER_TAMPON_H
