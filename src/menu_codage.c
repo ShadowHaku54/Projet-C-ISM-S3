@@ -4,7 +4,8 @@ const char *Menu_Codage[] = {
     "decimal en binaire",
     "octal en binaire",
     "hexadecimal en binaire",
-    "retour"
+    "retour",
+    "quitter"
 };
 
-const int TailleMenuCodage = 4;
+const int TailleMenuCodage = sizeof(Menu_Codage) / sizeof(Menu_Codage[0]);

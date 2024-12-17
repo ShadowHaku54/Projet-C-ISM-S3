@@ -5,7 +5,7 @@
 #include "allouage_dynamique_str.h"
 #include "vider_tampon.h"
 
-#define MAX_CHAR 10
+#define MAX_CHAR 50
 #define TAB "   "
 
 char *input(char *sms)
@@ -22,9 +22,8 @@ char *input(char *sms)
         vider_tampon();
         return NULL;
     }
-    else{
-        *pos = '\0';
-    }
+
+    *pos = '\0';
 
     char *value = NULL;
     alloue_str(&value, strlen(TMP) + 1);

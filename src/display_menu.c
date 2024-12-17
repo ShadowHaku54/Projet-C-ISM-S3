@@ -7,5 +7,4 @@ void display_menu(const char *tabMenu[], int tailleMenu)
     for (i = 0; i < tailleMenu; i++){
         printf("%d. %s\n", i+1, tabMenu[i]);
     }
-    printf("%d. Quitter\n", i+1);
 }

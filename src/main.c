@@ -6,16 +6,11 @@
 #include "menu_main.h"
 #include "menu_codage.h"
 #include "menu_decodage.h"
-#include "menu_transcodage.h"
-
-#include "conversion.h"
-#include "input.h"
 
 // FONCTIONNALITES AFFICHAGE
 #include "display_menu.h"
 
-#include "inputChoice.h"
-
+#include "use_case_conversion.h"
 
 int main()
 {
@@ -54,9 +49,22 @@ int main()
 //    printf("%d en decimal vaut %s en base %d\n", decimal, octal, bq);
 //    libere_alloue(octal);
 
-    char *test = input("Entrer un nombre :");
-    puts(test);
+//    char *test = input("Entrer un nombre :");
+//    puts(test);
+//    char *before, *after = NULL;
+//    split(test, '.', &before, &after);
+//    printf("b: %s | a: %s\n", before, after);
+//    libere_alloue(test);
+//    libere_alloue(before);
+//    libere_alloue(after);
 
+//    display_menu(Menu_Conversion, TailleMenuConversion);
+
+    if (!useCase_codage_or_transcodage(Menu_Codage, TailleMenuCodage, 1)){
+        return 0;
+    } else if (!useCase_codage_or_transcodage(Menu_Decodage, TailleMenuDecodage, 0)){
+        return 0;
+    }
 
     return 0;
 }

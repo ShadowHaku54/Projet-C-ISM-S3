@@ -4,7 +4,8 @@ const char *Menu_Transcodage[] = {
     "decimal en octal",
     "decimal en hexa",
     "nombre fractionnaire",
-    "retour"
+    "retour",
+    "quitter"
 };
 
 const int TailleMenuTranscodage = 4;
