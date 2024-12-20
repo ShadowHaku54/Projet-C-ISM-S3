@@ -1,5 +1,5 @@
-#ifndef MENU_CONVERSION_H
-#define MENU_CONVERSION_H
+#ifndef __MENU_CONVERSION_H__
+#define __MENU_CONVERSION_H__
 extern const char *Menu_Conversion[];
 extern const int TailleMenuConversion;
-#endif // MENU_CONVERSION_H
+#endif // __MENU_CONVERSION_H__

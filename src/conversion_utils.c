@@ -23,3 +23,21 @@ char convertir_decimal_en_car(int decimal)
     return decimal - 10 + 65;
 }
 
+int check_num_int_in_base(int n, int b)
+{
+    return (n >= 0 && n < b);
+}
+
+int check_number_in_base(char *number, int base)
+{
+    for (int i = 0; number[i] != '\0'; i++){
+        int decimal = convertir_car_en_decimal(number[i]);
+        if (!check_num_int_in_base(decimal, base)){
+            return 0;
+        }
+    }
+    return 1;
+}
+
+
+

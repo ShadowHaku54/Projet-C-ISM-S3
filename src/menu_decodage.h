@@ -1,5 +1,5 @@
-#ifndef MENU_DECODAGE
-#define MENU_DECODAGE
+#ifndef __MENU_DECODAGE__
+#define __MENU_DECODAGE__
 extern const char *Menu_Decodage[];
 extern const int TailleMenuDecodage;
-#endif // MENU_DECODAGE_H
+#endif // __MENU_DECODAGE_H__

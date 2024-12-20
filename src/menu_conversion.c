@@ -5,6 +5,7 @@ const char *Menu_Conversion[] = {
     "transcodage",
     "personaliser",
     "codage en complément à deux",
+    "historique",
     "retour",
     "quitter",
 };

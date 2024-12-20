@@ -4,30 +4,48 @@
 #include "input.h"
 #include "allouage_dynamique_str.h"
 #include "vider_tampon.h"
+#include "supspace.h"
+#include "constantes_prog.h"
 
-#define MAX_CHAR 50
-#define TAB "   "
 
-char *input(char *sms)
+char *input(char *sms, const int max_size)
 {
-    char TMP[MAX_CHAR];
+    char TMP[max_size];
     puts(sms);
     printf(">%s", TAB);
-    if (fgets(TMP, MAX_CHAR, stdin) == NULL){
-        return NULL;
-    }
+
+    do{
+        if (fgets(TMP, max_size, stdin) == NULL){
+            return NULL;
+        }
+    } while(TMP[0] == '\n');
 
     char *pos = strchr(TMP, '\n');
     if (pos == NULL){
         vider_tampon();
         return NULL;
     }
-
     *pos = '\0';
+
+    supspace(TMP);
 
     char *value = NULL;
     alloue_str(&value, strlen(TMP) + 1);
     strcpy(value, TMP);
 
     return value;
+}
+
+
+char *input_data_type_int(char *sms) {
+    return input(sms, MAX_CHAR_INT);
+}
+
+char *input_data_small(char *sms) {
+    return input(sms, MAX_SMALL_CHAR);
+}
+
+char *input_text(char *sms)
+{
+    return input(sms, MAX_CHAR);
 }

@@ -14,3 +14,15 @@ int isAlphabetMins(char var)
 {
     return (var>='a' && var<='z');
 }
+
+int char_is_number(char *var)
+{
+    int i = 0;
+    while (var[i] != '\0'){
+        if(!isNumber(var[i])){
+            return 0;
+        }
+        i++;
+    }
+    return 1;
+}

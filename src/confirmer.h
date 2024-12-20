@@ -1,4 +1,4 @@
-#ifndef CONFIRMER_H
-#define CONFIRMER_H
+#ifndef __CONFIRMER_H__
+#define __CONFIRMER_H__
 int confirmer(char *sms);
-#endif // CONFIRMER_H
+#endif // __CONFIRMER_H__

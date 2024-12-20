@@ -1,5 +1,5 @@
-#ifndef MENU_CODAGE_H
-#define MENU_CODAGE_H
+#ifndef __MENU_CODAGE_H__
+#define __MENU_CODAGE_H__
 extern const char *Menu_Codage[];
 extern const int TailleMenuCodage;
-#endif // MENU_CODAGE_H
+#endif // __MENU_CODAGE_H__

@@ -1,14 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdlib.h>
 #include <locale.h> // affiche les cractères spréciaux sur le terminal
 // LES MENUS
 #include "menu_main.h"
-#include "menu_codage.h"
-#include "menu_decodage.h"
 
 // FONCTIONNALITES AFFICHAGE
-#include "display_menu.h"
 
 #include "use_case_conversion.h"
 
@@ -60,12 +56,7 @@ int main()
 
 //    display_menu(Menu_Conversion, TailleMenuConversion);
 
-    if (!useCase_codage_or_transcodage(Menu_Codage, TailleMenuCodage, 1)){
-        return 0;
-    } else if (!useCase_codage_or_transcodage(Menu_Decodage, TailleMenuDecodage, 0)){
-        return 0;
-    }
-
+    use_case_conversion();
     return 0;
 }
 

@@ -1,5 +1,7 @@
-#ifndef USE_CASE_CONVERSION
-#define USE_CASE_CONVERSION
+#ifndef __USE_CASE_CONVERSION__
+#define __USE_CASE_CONVERSION__
+
+int use_case_conversion();
 int useCase_codage_or_transcodage(const char *tabMenu[], int N, int or);
-void process_conversion(int base_depart, int base_arrive, char *nombre_saisie);
-#endif // USE_CASE_CONVERSION
+
+#endif // __USE_CASE_CONVERSION__
