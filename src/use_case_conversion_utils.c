@@ -11,13 +11,35 @@
 
 const int Standar_Tab_Base[] ={2, 10, 8, 16};
 
+
+int useCase_codage_or_transcodage(const char *tabMenu[], int N, int statut, const char *Title)
+{
+    while (1){
+        int n = gestion_menu_choix(tabMenu, N, Title);
+
+        if(n != -1){
+
+            if (n == N){
+                return 0;
+            }
+            else if (n == N-1){
+                return 1;
+            }
+
+            underUseCase_saisieEtconversion(statut, n);
+        }
+    };
+}
+
+
+
 void underUseCase_saisieEtconversion(int statut, int n)
 {
     do{
         int base_depart = (statut) ? Standar_Tab_Base[n] : 2;
         int base_arrive = (statut) ? 2 : Standar_Tab_Base[n];
 
-        char *nombre_saisie = input_data_type_int("Saisir le nombre:");
+        char *nombre_saisie = input_data_type_int("SAISIR LE NOMBRE:");
 
         if (view_char_isNull_after_input(nombre_saisie)){
             continue;
@@ -27,7 +49,7 @@ void underUseCase_saisieEtconversion(int statut, int n)
 
         libere_alloue(nombre_saisie);
 
-    }while(confirmer("Voulez vous continuer à saisir? (o/n)"));
+    }while(confirmer("VOULEZ VOUS CONTINUEZ Ã€ CONVERTIR? (O/N)"));
 }
 
 void process_conversion(int base_depart, int base_arrive, char *nombre_saisie) {
@@ -49,13 +71,13 @@ void process_conversion(int base_depart, int base_arrive, char *nombre_saisie) {
             if (after_converti != NULL){
                 printf("(%c%s.%s)Base%d vaut (%c%s.%s)Base%d\n", Sneg, before, after, base_depart, Sneg, before_converti, after_converti, base_arrive);
             } else {
-                printf("Désolé ! Le nombre saisit n'appartient pas à la base %d\n", base_depart);
+                printf("DÃ‰SOLÃ‰ ! LE NOMBRE SAISIT N'APPARTIENT PAS Ã€ LA BASE %d\n", base_depart);
             }
         } else {
             printf("(%c%s)Base%d vaut (%c%s)Base%d\n", Sneg, before, base_depart, Sneg, before_converti, base_arrive);
         }
     } else {
-        printf("Désolé ! Le nombre saisit n'appartient pas à la base %d\n", base_depart);
+        printf("DÃ‰SOLÃ‰ ! LE NOMBRE SAISIT N'APPARTIENT PAS Ã€ LA BASE %d\n", base_depart);
     }
 
     libere_alloue(before_converti);
@@ -68,25 +90,25 @@ void UseCase_personalise()
 {
     do{
 
-        int base_depart = saisie_small_number("Entrer la base de départ: ");
+        int base_depart = saisie_small_number("Entrer la base de dÃ©part: ");
         if (base_depart == -1 || !view_check_base(base_depart)){
             continue;
         }
 
-        int base_arrive = saisie_small_number("Entrer la base de d'arrivé: ");
+        int base_arrive = saisie_small_number("Entrer la base de d'arrivÃ©: ");
         if (base_arrive == -1 || !view_check_base(base_arrive)){
             continue;
         }
 
         if (base_depart == base_arrive){
-            puts("Veuillez saisir une base de départ différente de la base d'arrivée!");
+            puts("Veuillez saisir une base de dï¿½part diffï¿½rente de la base d'arrivÃ©e!");
             continue;
         }
 
         char *nombre_saisie = input_data_type_int("Saisir le nombre:");
 
         if (nombre_saisie == NULL){
-            puts("Erreur lors de la saisie. \nValeur trop grande ou comportement inantendue! \nRéessayer!\n");
+            puts("Erreur lors de la saisie. \nValeur trop grande ou comportement inantendue! \nRÃ©essayer!\n");
             libere_alloue(nombre_saisie);
             continue;
         }
@@ -95,5 +117,5 @@ void UseCase_personalise()
 
         libere_alloue(nombre_saisie);
 
-    }while(confirmer("Voulez vous continuer à convertir? (o/n)"));
+    }while(confirmer("Voulez vous continuer Ã  convertir? (o/n)"));
 }

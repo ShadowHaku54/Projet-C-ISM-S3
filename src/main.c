@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <locale.h> // affiche les cractères spréciaux sur le terminal
 // LES MENUS
 #include "menu_main.h"
 
@@ -8,9 +7,11 @@
 
 #include "use_case_conversion.h"
 
+
 int main()
 {
-    setlocale(LC_ALL, ""); // permet d'afficher les caractères spéciaux
+//    setlocale(LC_ALL, "");
+
 
 //    int choixP;
 //

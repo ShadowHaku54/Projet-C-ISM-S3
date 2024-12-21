@@ -1,14 +1,14 @@
+#include <stdlib.h>
 #include "use_case_conversion.h"
 #include "menus_useCase_conversion.h"
 #include "gestion_menu_choix.h"
 #include "use_case_conversion_utils.h"
 
 
-
 int use_case_conversion()
 {
     while (1) {
-        int n = gestion_menu_choix(Menu_Conversion, TailleMenuConversion);
+        int n = gestion_menu_choix(Menu_Conversion, TailleMenuConversion, NameMenuConversion);
 
         if(n != -1){
 
@@ -20,40 +20,27 @@ int use_case_conversion()
             }
 
             else if (n == 1){
-                if (!useCase_codage_or_transcodage(Menu_Codage, TailleMenuCodage, 1)){
+                if (!useCase_codage_or_transcodage(Menu_Codage, TailleMenuCodage, 1, NameMenuCodage)){
                     return 0;
                 }
             }
             else if (n == 2){
-                if (!useCase_codage_or_transcodage(Menu_Decodage, TailleMenuDecodage, 0)){
+                if (!useCase_codage_or_transcodage(Menu_Decodage, TailleMenuDecodage, 0, NameMenuDecodage)){
                     return 0;
                 }
             }
             else if (n == 3){
                 UseCase_personalise();
             }
-
+            else if (n == 4){
+                // complémnt à deux
+            }
+            else if (n == 5){
+                // historique
+            }
         }
     };
 }
 
-int useCase_codage_or_transcodage(const char *tabMenu[], int N, int statut)
-{
-    while (1){
-        int n = gestion_menu_choix(tabMenu, N);
-
-        if(n != -1){
-
-            if (n == N){
-                return 0;
-            }
-            else if (n == N-1){
-                return 1;
-            }
-
-            underUseCase_saisieEtconversion(statut, n);
-        }
-    };
-}
 
 

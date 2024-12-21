@@ -6,13 +6,16 @@
 #include "vider_tampon.h"
 #include "supspace.h"
 #include "constantes_prog.h"
+#include "styles.h"
+
 
 
 char *input(char *sms, const int max_size)
 {
     char TMP[max_size];
-    puts(sms);
-    printf(">%s", TAB);
+    printf("\n");
+    printf("%s\n", sms);
+    printf(">%s",  TAB);
 
     do{
         if (fgets(TMP, max_size, stdin) == NULL){
