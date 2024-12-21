@@ -2,6 +2,7 @@
 #include "confirmer.h"
 #include "input.h"
 #include "allouage_dynamique_str.h"
+#include "view_sms.h"
 
 int confirmer(char *sms)
 {
@@ -10,16 +11,19 @@ int confirmer(char *sms)
     int non_ok;
     do{
         rep = input_data_small(sms);
-        if (rep == NULL){
-            puts("Erreur lors de la saisie. \nValeur trop grande ou comportement inantendue! \nRéessayer!\n");
-            continue;
-        }
-        c = rep[0];
-        non_ok = (c != 'n' && c !='o' && c != '\0' && c != 'O' && c != 'N');
 
-        if(non_ok){
-            puts("Mauvaise saisie!\n");
+        if (view_char_isNull_after_input(rep)){
+            non_ok = 1;
+
+        } else {
+            c = rep[0];
+            non_ok = (c != 'n' && c !='o' && c != '\0' && c != 'O' && c != 'N');
+
+            if(non_ok){
+                puts("Mauvaise saisie!\n");
+            }
         }
+
     }while(non_ok);
     libere_alloue(rep);
     return (c ==  'o' || c == 'O');

@@ -3,6 +3,7 @@
 #include "conversion_utils.h"
 #include "inverseChaine.h"
 #include "allouage_dynamique_str.h"
+#include <stdio.h>
 
 
 Very_Long_int convert_baseQ_to_decimal(int bq, char *number)
@@ -31,8 +32,12 @@ Very_Long_int convert_baseQ_to_decimal(int bq, char *number)
 
 char *convert_decimal_to_baseQ(int bq, Very_Long_int decimal, int max_size)
 {
+    if (decimal == 0){
+        return "0";
+    }
+
     char *number = NULL;
-    alloue_str(&number, max_size);
+    alloue_str(&number, max_size + 1);
 
     int i = 0;
     while(decimal != 0){
@@ -45,3 +50,24 @@ char *convert_decimal_to_baseQ(int bq, Very_Long_int decimal, int max_size)
     inverseChaine(number);
     return number;
 }
+
+char *convert_float_to_baseQ(int bq, double fraction_decimal, int precision)
+{
+    if (fraction_decimal == 0){
+        return "0";
+    }
+    char *result = NULL;
+    alloue_str(&result, precision + 1);
+
+    int i = 0;
+    while(fraction_decimal > 1e-15 && i < precision){
+        fraction_decimal *= bq;
+        int newVal = (int) fraction_decimal;
+        result[i] = convertir_decimal_en_car(newVal);
+        fraction_decimal -= newVal;
+        i++;
+    }
+    result[i] = '\0';
+    return result;
+}
+

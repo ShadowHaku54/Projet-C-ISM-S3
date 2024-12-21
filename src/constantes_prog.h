@@ -24,6 +24,7 @@
 #define COLOR_YELLOW_ON_RED ((0x4 << 4) | 0xE) // Texte jaune, fond rouge
 #define COLOR_DEFAULT ((0x0 << 4) | 0x7)       // Texte gris clair, fond noir
 
+#define PRECISION_FLOAT 20
 
 #define ERROR_SMS_INPUT
 

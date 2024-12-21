@@ -8,6 +8,7 @@
 #include "confirmer.h"
 #include "view_sms.h"
 #include "saisie_small_number.h"
+#include "constantes_prog.h"
 
 const int Standar_Tab_Base[] ={2, 10, 8, 16};
 
@@ -64,10 +65,10 @@ void process_conversion(int base_depart, int base_arrive, char *nombre_saisie) {
     char *before_converti = NULL;
     char *after_converti = NULL;
 
-    before_converti = convert_all_base(base_depart, base_arrive, before);
+    before_converti = convert_all_base_partInt(base_depart, base_arrive, before);
     if (before_converti != NULL){
         if (after != NULL){
-            after_converti = convert_all_base(base_depart, base_arrive, after);
+            after_converti = convert_all_base_partFract(base_depart, base_arrive, after, PRECISION_FLOAT);
             if (after_converti != NULL){
                 printf("(%c%s.%s)Base%d vaut (%c%s.%s)Base%d\n", Sneg, before, after, base_depart, Sneg, before_converti, after_converti, base_arrive);
             } else {
@@ -101,7 +102,7 @@ void UseCase_personalise()
         }
 
         if (base_depart == base_arrive){
-            puts("Veuillez saisir une base de d�part diff�rente de la base d'arrivée!");
+            puts("Veuillez saisir une base de départ différente de la base d'arrivée!");
             continue;
         }
 
