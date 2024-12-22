@@ -1,6 +1,5 @@
 #include "gestions_str.h"
 #include <string.h>
-#include "split.h"
 #include "allouage_dynamique_str.h"
 
 void inverseChaine(char *chaine)
