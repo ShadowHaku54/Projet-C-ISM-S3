@@ -4,7 +4,7 @@
 #include "input.h"
 #include "allouage_dynamique_str.h"
 #include "vider_tampon.h"
-#include "supspace.h"
+#include "gestions_str.h"
 #include "constantes_prog.h"
 
 
