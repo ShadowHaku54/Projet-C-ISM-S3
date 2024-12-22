@@ -10,9 +10,11 @@
 #include "constantes_prog.h"
 #include "styles.h"
 #include <windows.h>
+#include "page_error.h"
 
 const int Standar_Tab_Base[] ={2, 10, 8, 16};
 
+static char message[90];
 
 void underUseCase_saisieEtconversion(int statut, int n)
 {
@@ -59,14 +61,20 @@ void process_conversion(int base_depart, int base_arrive, char *nombre_saisie)
                 printf("%s %s", before_converti, after_converti);
                 afficher_resultat_apres_conversion(base_depart, base_arrive, Sneg, before, after, before_converti, after_converti);
             } else {
-                printf("DÉSOLÉ ! LE NOMBRE SAISIT N'APPARTIENT PAS À LA BASE %d\n", base_depart);
+                snprintf(message, sizeof(message), "DÉSOLÉ ! LE NOMBRE SAISIT N'APPARTIENT PAS À LA BASE %d", base_depart);
+                page_error(message);
             }
         } else {
             printf("%s %s", before_converti, after_converti);
             afficher_resultat_apres_conversion(base_depart, base_arrive, Sneg, before, after, before_converti, after_converti);
+            fillConsoleBackground(COLOR_TEXT_DEFAULT, BG_COLOR_DEFAULT);
+            setConsoleColor(COLOR_TEXT_DEFAULT, BG_COLOR_DEFAULT);
         }
     } else {
-        printf("DÉSOLÉ ! LE NOMBRE SAISIT N'APPARTIENT PAS À LA BASE %d\n", base_depart);
+        snprintf(message, sizeof(message), "DÉSOLÉ ! LE NOMBRE SAISIT N'APPARTIENT PAS À LA BASE %d", base_depart);
+        page_error(message);
+        fillConsoleBackground(COLOR_TEXT_DEFAULT, BG_COLOR_DEFAULT);
+        setConsoleColor(COLOR_TEXT_DEFAULT, BG_COLOR_DEFAULT);
     }
 
     libere_alloue(&before);
@@ -82,20 +90,20 @@ void UseCase_personalise()
     do{
         afficher_tables_bases(-1, -1);
 
-        int base_depart = saisie_small_number("Entrer la base de départ: ");
+        int base_depart = saisie_small_number("ENTRER LA BASE DE DEPART :");
         if (base_depart == -1 || !view_check_base(base_depart)){
             continue;
         }
         afficher_tables_bases(base_depart, -1);
 
-        int base_arrive = saisie_small_number("Entrer la base de d'arrivé: ");
+        int base_arrive = saisie_small_number("ENTRER LA BASE D'ARRIVEE :");
         if (base_arrive == -1 || !view_check_base(base_arrive)){
             continue;
         }
         afficher_tables_bases(base_depart, base_arrive);
 
         if (base_depart == base_arrive){
-            puts("Veuillez saisir une base de départ différente de la base d'arrivée!");
+            page_error("VEUILLEZ SAISIR UNE BASE DE DEPART DIFFERENTE DE LA BASE D'ARRIVEE!");
             continue;
         }
 

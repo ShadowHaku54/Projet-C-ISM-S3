@@ -139,6 +139,7 @@ void afficher_resultat_apres_conversion(int base_depart, int base_arrive, char S
 
     printf("\n\n\n\n\n");
     print_ligne_spaces(SCREEM + MARGE_1/2 - 7);
+
     setConsoleColor(GREEN, background);
     printf("RESULTAT");
     setConsoleColor(local_color_border, background);

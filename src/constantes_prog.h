@@ -3,7 +3,7 @@
 
 #define MAX_CHAR_INT 20
 #define MAX_SMALL_CHAR 5
-#define MAX_CHAR 255
+#define MAX_CHAR 100
 
 
 #define TAB "   "
@@ -93,15 +93,15 @@
 #define ANSI_BG_BRIGHT_WHITE   "\033[107m"
 
 
-#define ANSI_RESET        "\033[0m"
 #define ANSI_BOLD         "\033[1m"
 #define ANSI_DIM          "\033[2m"
 #define ANSI_ITALIC       "\033[3m"
 #define ANSI_UNDERLINE    "\033[4m"
-#define ANSI_BLINK        "\033[5m"
 #define ANSI_REVERSE      "\033[7m"
 #define ANSI_HIDDEN       "\033[8m"
 */
 
+#define ANSI_BLINK        "\033[5m"
 
 #endif // __CONSTANTES_PROG_H__
+#define ANSI_RESET        "\033[0m"
