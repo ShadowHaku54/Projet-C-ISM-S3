@@ -9,4 +9,5 @@ void set_background_color(int color);
 void set_text_color_ansi(int colorCode);
 void setConsoleColor(int textColor, int backgroundColor);
 void fillConsoleBackground(int textColor, int backgroundColor);
+void afficher_tables(int base_depart, int base_arrive, int fontColor, int textColor, int borderColor, int marge);
 #endif // __STYLES_H__

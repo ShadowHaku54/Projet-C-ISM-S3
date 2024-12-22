@@ -57,3 +57,56 @@ void fillConsoleBackground(int textColor, int backgroundColor)
     SetConsoleCursorPosition(hConsole, (COORD){0, 0});
 }
 
+void afficher_tables(int base_depart, int base_arrive, int fontColor, int textColor, int borderColor, int marge)
+{
+    system("cls");
+    printf("\n");
+
+    setConsoleColor(borderColor, fontColor);
+    print_ligne_spaces(marge);
+    printf("╔════════════════╗                  ╔════════════════╗\n");
+    print_ligne_spaces(marge);
+    printf("║ ");
+
+    setConsoleColor(textColor, fontColor);
+    printf("Base de départ");
+
+    setConsoleColor(borderColor, fontColor);
+    printf(" ║        TO        ║ ");
+
+    setConsoleColor(textColor, fontColor);
+    printf("Base d'arrivée");
+
+    setConsoleColor(borderColor, fontColor);
+    printf(" ║\n");
+    print_ligne_spaces(marge);
+    printf("╠════════════════╣                  ╠════════════════╣\n");
+    print_ligne_spaces(marge);
+    printf("║");
+
+    setConsoleColor(textColor, fontColor);
+    if (base_depart != -1) {
+        int cc = ((base_depart/10) == 0) ? 1 : 0;
+        printf("%*s%d%*s", 7, "", base_depart, 7+cc, "");
+    } else {
+        printf("%*s", 16, " ");
+    }
+    setConsoleColor(borderColor, fontColor);
+    printf("║                  ");
+
+    printf("║");
+    setConsoleColor(textColor, fontColor);
+    if (base_arrive != -1) {
+        int cc = (base_arrive / 10) == 0 ? 1 : 0;
+        printf("%*s%d%*s", 7, "", base_arrive, 7+cc, "");
+    } else {
+        printf("%*s", 16, " ");
+    }
+
+    setConsoleColor(borderColor, fontColor);
+    printf("║\n");
+    print_ligne_spaces(marge);
+    printf("╚════════════════╝                  ╚════════════════╝\n\n\n");
+
+    setConsoleColor(textColor, fontColor);
+}

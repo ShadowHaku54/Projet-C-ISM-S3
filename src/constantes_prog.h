@@ -9,6 +9,7 @@
 #define TAB "   "
 #define SCREEM 40
 #define LARGEUR 40
+#define MARGE_1 30
 
 #define DELAIS_MS 50
 #define VRAI 1
@@ -54,9 +55,9 @@
 #define BG_COLOR_CONVERSION   BLUE
 #define BORDER_COLOR_CONVERSION CYAN
 
-#define COLOR_CODAGE          WHITE
-#define BG_COLOR_CODAGE       LIGHT_GREEN
-#define BORDER_COLOR_CODAGE   GREEN
+#define COLOR_CODAGE          GREEN
+#define BG_COLOR_CODAGE       LIGHT_YELLOW
+#define BORDER_COLOR_CODAGE   BRIGHT_WHITE
 
 #define COLOR_DECODAGE        LIGHT_YELLOW
 #define BG_COLOR_DECODAGE     RED
@@ -75,7 +76,6 @@
 #define BORDER_COLOR_HISTORIQUE YELLOW
 
 /*
-// Couleurs de base
 #define ANSI_BG_BLACK   "\033[40m"
 #define ANSI_BG_RED     "\033[41m"
 #define ANSI_BG_GREEN   "\033[42m"
@@ -85,7 +85,6 @@
 #define ANSI_BG_CYAN    "\033[46m"
 #define ANSI_BG_WHITE   "\033[47m"
 
-// Couleurs claires
 #define ANSI_BG_BRIGHT_BLACK   "\033[100m"
 #define ANSI_BG_BRIGHT_RED     "\033[101m"
 #define ANSI_BG_BRIGHT_GREEN   "\033[102m"
@@ -96,14 +95,14 @@
 #define ANSI_BG_BRIGHT_WHITE   "\033[107m"
 
 
-#define ANSI_RESET        "\033[0m"   // Réinitialiser les styles
-#define ANSI_BOLD         "\033[1m"  // Gras
-#define ANSI_DIM          "\033[2m"  // Atténué
-#define ANSI_ITALIC       "\033[3m"  // Italique
-#define ANSI_UNDERLINE    "\033[4m"  // Souligné
-#define ANSI_BLINK        "\033[5m"  // Clignotant
-#define ANSI_REVERSE      "\033[7m"  // Couleurs inversées
-#define ANSI_HIDDEN       "\033[8m"  // Texte caché
+#define ANSI_RESET        "\033[0m"
+#define ANSI_BOLD         "\033[1m"
+#define ANSI_DIM          "\033[2m"
+#define ANSI_ITALIC       "\033[3m"
+#define ANSI_UNDERLINE    "\033[4m"
+#define ANSI_BLINK        "\033[5m"
+#define ANSI_REVERSE      "\033[7m"
+#define ANSI_HIDDEN       "\033[8m"
 */
 
 

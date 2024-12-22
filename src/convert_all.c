@@ -22,7 +22,7 @@ char *convert_all_base_partFract(int bd, int ba, char *number_after, int precisi
         return NULL;
     }
 
-    double deviseur = pow(bd, strlen(number_after));
-    double fraction = decimal / deviseur;
+    double diviseur = pow(bd, strlen(number_after));
+    double fraction = decimal / diviseur;
     return convert_float_to_baseQ(ba, fraction, precision);
 }
