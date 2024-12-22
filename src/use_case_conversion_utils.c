@@ -3,7 +3,7 @@
 #include "input.h"
 #include "allouage_dynamique_str.h"
 #include "convert_all.h"
-#include "gestions_str.c"
+#include "gestions_str.h"
 #include "confirmer.h"
 #include "view_sms.h"
 #include "saisie_small_number.h"
