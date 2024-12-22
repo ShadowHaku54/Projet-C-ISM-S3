@@ -1,6 +1,5 @@
 #include "saisie_small_number.h"
 #include "input.h"
-#include "checks.h"
 #include "view_sms.h"
 #include "allouage_dynamique_str.h"
 #include <stdlib.h>

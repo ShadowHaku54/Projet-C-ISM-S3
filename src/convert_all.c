@@ -1,7 +1,6 @@
 #include <string.h>
 #include "convert_all.h"
 #include "conversion.h"
-#include <stdio.h>
 #include <math.h>
 
 char *convert_all_base_partInt(int bd, int ba, char *number)
@@ -24,9 +23,6 @@ char *convert_all_base_partFract(int bd, int ba, char *number_after, int precisi
     }
 
     double deviseur = pow(10, strlen(number_after));
-    printf("decimal : %llu\n", decimal);
-    printf("diviseur : %f\n", deviseur);
     double fraction = decimal / deviseur;
-    printf("fraction: %f\n", fraction);
     return convert_float_to_baseQ(ba, fraction, precision);
 }

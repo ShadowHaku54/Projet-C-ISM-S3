@@ -4,12 +4,14 @@
 #include <windows.h>
 #include "gestion_menu_choix.h"
 #include "input.h"
-#include "allouage_dynamique_str.h"
 #include "view_sms.h"
 #include "saisie_small_number.h"
 #include "styles.h"
 #include "constantes_prog.h"
 
+static void display_menu(const char *tabMenu[], int tailleMenu,
+                  const char *titreMenu, int fontColor, int textColor,
+                  int borderColor, int delayMs, int largeurMenu);
 
 int gestion_menu_choix(const char *tabMenu[], int taille, const char *Title, int fontColor, int textColor, int borderColor)
 {
@@ -29,7 +31,7 @@ int gestion_menu_choix(const char *tabMenu[], int taille, const char *Title, int
     return choix;
 }
 
-void display_menu(const char *tabMenu[], int tailleMenu,
+static void display_menu(const char *tabMenu[], int tailleMenu,
                   const char *titreMenu, int fontColor, int textColor,
                   int borderColor, int delayMs, int largeurMenu)
 {

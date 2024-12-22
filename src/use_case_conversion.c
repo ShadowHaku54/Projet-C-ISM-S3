@@ -1,10 +1,11 @@
-#include <stdlib.h>
 #include "use_case_conversion.h"
 #include "menus_useCase_conversion.h"
 #include "gestion_menu_choix.h"
 #include "use_case_conversion_utils.h"
 #include "constantes_prog.h"
 #include "styles.h"
+
+static int useCase_codage_or_transcodage(const char *tabMenu[], int N, int statut, const char *Title);
 
 
 int use_case_conversion()
@@ -42,6 +43,29 @@ int use_case_conversion()
             else if (n == 5){
                 // historique
             }
+        }
+    };
+}
+
+
+static int useCase_codage_or_transcodage(const char *tabMenu[], int N, int statut, const char *Title)
+{
+    int color = (statut) ? COLOR_CODAGE : COLOR_DECODAGE;
+    int bgcolor = (statut) ? BG_COLOR_CODAGE : BG_COLOR_DECODAGE;
+    int bordercolor = (statut) ? BORDER_COLOR_CODAGE : BORDER_COLOR_DECODAGE;
+    while (1){
+        int n = gestion_menu_choix(tabMenu, N, Title, color, bgcolor, bordercolor);
+
+        if(n != -1){
+
+            if (n == N){
+                return 0;
+            }
+            else if (n == N-1){
+                return 1;
+            }
+
+            underUseCase_saisieEtconversion(statut, n);
         }
     };
 }

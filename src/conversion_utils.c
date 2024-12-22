@@ -39,16 +39,7 @@ int check_number_in_base(char *number, int base)
     return 1;
 }
 
-int nbNumb(int entier)
-{
-    if (entier == 0) return 1;
 
-    int nb = 0;
-    while(entier != 0){
-        nb++;
-        entier /= 10;
-    }
-    return nb;
-}
+
 
 
