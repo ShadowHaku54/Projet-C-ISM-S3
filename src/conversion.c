@@ -1,7 +1,7 @@
 #include <string.h>
 #include "conversion.h"
 #include "conversion_utils.h"
-#include "inverseChaine.h"
+#include "gestions_str.h"
 #include "allouage_dynamique_str.h"
 #include <math.h>
 
