@@ -11,10 +11,10 @@
 #include "constantes_prog.h"
 
 
-int gestion_menu_choix(const char *tabMenu[], int taille, const char *Title)
+int gestion_menu_choix(const char *tabMenu[], int taille, const char *Title, int fontColor, int textColor, int borderColor)
 {
-
-    display_menu(tabMenu, taille, Title, COLOR_BORDER_HIGHLIGHT, COLOR_TEXT_DEFAULT, DELAIS_MS, LARGEUR);
+    fillConsoleBackground(textColor, fontColor);
+    display_menu(tabMenu, taille, Title, fontColor, textColor, borderColor, DELAIS_MS, LARGEUR);
     int choix = saisie_small_number("FAITES VOTRE CHOIX :");
 
     if (choix == -1){
@@ -29,9 +29,11 @@ int gestion_menu_choix(const char *tabMenu[], int taille, const char *Title)
     return choix;
 }
 
-void display_menu(const char *tabMenu[], int tailleMenu, const char *titreMenu, int borderColor, int textColor, int delayMs, int largeurMenu)
+void display_menu(const char *tabMenu[], int tailleMenu,
+                  const char *titreMenu, int fontColor, int textColor,
+                  int borderColor, int delayMs, int largeurMenu)
 {
-    set_console_color(borderColor);
+    setConsoleColor(borderColor, fontColor);
     print_ligne("╔", "═", "╗", largeurMenu);
     print_ligne("║", " ", "║", largeurMenu);
 
@@ -41,11 +43,11 @@ void display_menu(const char *tabMenu[], int tailleMenu, const char *titreMenu, 
     print_ligne_spaces(SCREEM);
     printf("║");
 
-    set_console_color(textColor);
+    setConsoleColor(textColor, fontColor);
     for (int i = 0; i < padding; i++) printf(" ");
     affiche_lettre_par_lettre(titreMenu, delayMs);
 
-    set_console_color(borderColor);
+    setConsoleColor(borderColor, fontColor);
     print_ligne_spaces(largeurMenu - titreLen - padding);
     printf("║\n");
 
@@ -53,17 +55,17 @@ void display_menu(const char *tabMenu[], int tailleMenu, const char *titreMenu, 
     print_ligne("╠", "═", "╣", largeurMenu);
 
     for (int i = 0; i < tailleMenu ; i++) {
-        set_console_color(borderColor);
+        setConsoleColor(borderColor, fontColor);
         int optionLen = snprintf(NULL, 0, " %d ⮞ %s", i + 1, tabMenu[i]);
 
         print_ligne("║", " ", "║", largeurMenu);
         print_ligne_spaces(SCREEM);
         printf("║");
-        set_console_color(textColor);
+        setConsoleColor(textColor, fontColor);
         printf(" %d ⮞%s", i + 1, TAB);
         affiche_lettre_par_lettre(tabMenu[i], delayMs);
 
-        set_console_color(borderColor);
+        setConsoleColor(borderColor, fontColor);
         print_ligne_spaces(largeurMenu - optionLen);
         puts("║");
 
@@ -71,9 +73,8 @@ void display_menu(const char *tabMenu[], int tailleMenu, const char *titreMenu, 
             print_ligne("║", ".", "║", largeurMenu);
         }
     }
-
     print_ligne("╚", "═", "╝", largeurMenu);
-    set_console_color(textColor);
+    setConsoleColor(textColor, fontColor);
 }
 
 

@@ -14,11 +14,11 @@ int saisie_small_number(char *sms)
     }
 
     if(!view_char_is_number(base)){
-        libere_alloue(base);
+        libere_alloue(&base);
         return -1;
     }
 
     int b = atoi(base);
-    libere_alloue(base);
+    libere_alloue(&base);
     return b;
 }

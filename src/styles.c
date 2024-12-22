@@ -30,45 +30,30 @@ void affiche_lettre_par_lettre(const char *texte, int delai_ms)
     }
 }
 
-void set_console_color(int textColor)
+void setConsoleColor(int textColor, int backgroundColor)
 {
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-    CONSOLE_SCREEN_BUFFER_INFO csbi;
-
-    // Obtenir les informations actuelles de la console
-    if (GetConsoleScreenBufferInfo(hConsole, &csbi)) {
-        // Extraire la couleur de fond actuelle (4 bits de poids forts)
-        int backgroundColor = csbi.wAttributes & 0xF0;
-
-        // Combiner la couleur de fond existante avec la nouvelle couleur de texte
-        SetConsoleTextAttribute(hConsole, backgroundColor | (textColor & 0x0F));
-    }
+    SetConsoleTextAttribute(hConsole, (backgroundColor << BG_COLOR_SHIFT) | textColor);
 }
-void set_background_color(int color)
+
+
+void fillConsoleBackground(int textColor, int backgroundColor)
 {
+    system("cls");
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-    CONSOLE_SCREEN_BUFFER_INFO csbi;
+    CONSOLE_SCREEN_BUFFER_INFO consoleInfo;
     DWORD cellsWritten;
-    COORD topLeft = {0, 0};
+    DWORD consoleSize;
 
-    // Obtenir les dimensions actuelles de la console
-    if (!GetConsoleScreenBufferInfo(hConsole, &csbi)) {
-        return; // Si la fonction échoue, on quitte
-    }
+    GetConsoleScreenBufferInfo(hConsole, &consoleInfo);
 
-    DWORD consoleSize = csbi.dwSize.X * csbi.dwSize.Y;
+    consoleSize = consoleInfo.dwSize.X * consoleInfo.dwSize.Y;
+    int attribute = (backgroundColor << BG_COLOR_SHIFT) | textColor;
 
-    // Remplir l'écran avec la couleur spécifiée
-    FillConsoleOutputAttribute(hConsole, color, consoleSize, topLeft, &cellsWritten);
+    FillConsoleOutputAttribute(hConsole, attribute, consoleSize, (COORD){0, 0}, &cellsWritten);
 
-    // Effacer tout texte existant
-    FillConsoleOutputCharacter(hConsole, ' ', consoleSize, topLeft, &cellsWritten);
+    FillConsoleOutputCharacter(hConsole, ' ', consoleSize, (COORD){0, 0}, &cellsWritten);
 
-    // Positionner le curseur en haut à gauche
-    SetConsoleCursorPosition(hConsole, topLeft);
+    SetConsoleCursorPosition(hConsole, (COORD){0, 0});
 }
 
-void set_text_color_ansi(int colorCode)
-{
-    printf("\033[%dm", colorCode);
-}

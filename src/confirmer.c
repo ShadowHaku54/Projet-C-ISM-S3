@@ -25,6 +25,6 @@ int confirmer(char *sms)
         }
 
     }while(non_ok);
-    libere_alloue(rep);
+    libere_alloue(&rep);
     return (c ==  'o' || c == 'O');
 }

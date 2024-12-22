@@ -33,8 +33,10 @@ char *input(char *sms, const int max_size)
     supspace(TMP);
 
     char *value = NULL;
+    puts("Allocation du nombre saisie");
     alloue_str(&value, strlen(TMP) + 1);
     strcpy(value, TMP);
+    printf("Allocation du nombre saisie taille de sortie %d | adresse : %p\n", strlen(value), (void *)value);
 
     return value;
 }

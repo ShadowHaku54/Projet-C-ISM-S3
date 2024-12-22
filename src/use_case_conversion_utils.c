@@ -9,14 +9,19 @@
 #include "view_sms.h"
 #include "saisie_small_number.h"
 #include "constantes_prog.h"
+#include "styles.h"
+#include <windows.h>
 
 const int Standar_Tab_Base[] ={2, 10, 8, 16};
 
 
 int useCase_codage_or_transcodage(const char *tabMenu[], int N, int statut, const char *Title)
 {
+    int color = (statut) ? COLOR_CODAGE : COLOR_DECODAGE;
+    int bgcolor = (statut) ? BG_COLOR_CODAGE : BG_COLOR_DECODAGE;
+    int bordercolor = (statut) ? BORDER_COLOR_CODAGE : BORDER_COLOR_DECODAGE;
     while (1){
-        int n = gestion_menu_choix(tabMenu, N, Title);
+        int n = gestion_menu_choix(tabMenu, N, Title, color, bgcolor, bordercolor);
 
         if(n != -1){
 
@@ -36,6 +41,8 @@ int useCase_codage_or_transcodage(const char *tabMenu[], int N, int statut, cons
 
 void underUseCase_saisieEtconversion(int statut, int n)
 {
+    fillConsoleBackground(COLOR_TEXT_PRIMARY, BG_COLOR_PAGE_CONVERTIR);
+    setConsoleColor(COLOR_TEXT_PRIMARY, BG_COLOR_PAGE_CONVERTIR);
     do{
         int base_depart = (statut) ? Standar_Tab_Base[n] : 2;
         int base_arrive = (statut) ? 2 : Standar_Tab_Base[n];
@@ -48,12 +55,13 @@ void underUseCase_saisieEtconversion(int statut, int n)
 
         process_conversion(base_depart, base_arrive, nombre_saisie);
 
-        libere_alloue(nombre_saisie);
 
     }while(confirmer("VOULEZ VOUS CONTINUEZ À CONVERTIR? (O/N)"));
 }
 
-void process_conversion(int base_depart, int base_arrive, char *nombre_saisie) {
+void process_conversion(int base_depart, int base_arrive, char *nombre_saisie)
+{
+
     char Sneg = (nombre_saisie[0] == '-') ? '-' : '\0';
     char *nouveau_nombre = (Sneg == '-') ? nombre_saisie + 1 : nombre_saisie;
 
@@ -61,6 +69,7 @@ void process_conversion(int base_depart, int base_arrive, char *nombre_saisie) {
     char *after = NULL;
     split(nouveau_nombre, '.', &before, &after);
 
+    libere_alloue(&nombre_saisie);
 
     char *before_converti = NULL;
     char *after_converti = NULL;
@@ -68,27 +77,37 @@ void process_conversion(int base_depart, int base_arrive, char *nombre_saisie) {
     before_converti = convert_all_base_partInt(base_depart, base_arrive, before);
     if (before_converti != NULL){
         if (after != NULL){
+            printf("After: %s\n", after);
             after_converti = convert_all_base_partFract(base_depart, base_arrive, after, PRECISION_FLOAT);
             if (after_converti != NULL){
                 printf("(%c%s.%s)Base%d vaut (%c%s.%s)Base%d\n", Sneg, before, after, base_depart, Sneg, before_converti, after_converti, base_arrive);
+                printf("passer1\n");
+                libere_alloue(&after_converti);
+                printf("passer2\n");
             } else {
                 printf("DÉSOLÉ ! LE NOMBRE SAISIT N'APPARTIENT PAS À LA BASE %d\n", base_depart);
             }
+            printf("passer3\n");
+            printf("after: %s p:%p\n", after, (void *)after);
+            free(after);
+            printf("passer4\n");
         } else {
             printf("(%c%s)Base%d vaut (%c%s)Base%d\n", Sneg, before, base_depart, Sneg, before_converti, base_arrive);
+            libere_alloue(&before_converti);
         }
+        printf("passer5\n");
     } else {
         printf("DÉSOLÉ ! LE NOMBRE SAISIT N'APPARTIENT PAS À LA BASE %d\n", base_depart);
     }
+    libere_alloue(&before);
 
-    libere_alloue(before_converti);
-    libere_alloue(after_converti);
-    libere_alloue(before);
-    libere_alloue(after);
+    printf("passer6\n");
 }
 
 void UseCase_personalise()
 {
+    fillConsoleBackground(COLOR_TEXT_PRIMARY, BG_COLOR_PAGE_CONVERTIR);
+    setConsoleColor(COLOR_TEXT_PRIMARY, BG_COLOR_PAGE_CONVERTIR);
     do{
 
         int base_depart = saisie_small_number("Entrer la base de départ: ");
@@ -110,13 +129,13 @@ void UseCase_personalise()
 
         if (nombre_saisie == NULL){
             puts("Erreur lors de la saisie. \nValeur trop grande ou comportement inantendue! \nRéessayer!\n");
-            libere_alloue(nombre_saisie);
+            libere_alloue(&nombre_saisie);
             continue;
         }
 
         process_conversion(base_depart, base_arrive, nombre_saisie);
 
-        libere_alloue(nombre_saisie);
+        libere_alloue(&nombre_saisie);
 
     }while(confirmer("Voulez vous continuer à convertir? (o/n)"));
 }

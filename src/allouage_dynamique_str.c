@@ -2,20 +2,32 @@
 #include <stdlib.h>
 #include "allouage_dynamique_str.h"
 
+static size_t total_memory_allocated = 0;
+
 void alloue_str(char **str, int taille)
 {
+    *str = NULL;
     *str = malloc(taille * sizeof(char));
-
+    printf("%p\n", (void *)*str);
     if (*str == NULL)
     {
-        puts("Erreur système! L'allocation c'est mal déroulée.\nVEUILLEZ VERIFIER VOTRE ESPACE MEMOIRE");
-        libere_alloue(str);
+        puts("ERREUR SYSTEME! L'ALLOCATION C'EST MAL DEROULEE.\nVEUILLEZ VERIFIER VOTRE ESPACE MEMOIRE");
+        printf("taille: %d\n", taille);
+        printf("Mémoire totale allouée jusqu'ici : %zu octets\n", total_memory_allocated);
         exit(1);
+    }
+    else {
+        puts("L'allocation réussi!");
+        total_memory_allocated += 1;
     }
 }
 
-void libere_alloue(void *alloue)
+void libere_alloue(char **ptr)
 {
-    free(alloue);
+    if(*ptr != NULL){
+        free(*ptr);
+        *ptr = NULL;
+        total_memory_allocated -= 1;
+    }
 }
 

@@ -3,12 +3,16 @@
 #include "menus_useCase_conversion.h"
 #include "gestion_menu_choix.h"
 #include "use_case_conversion_utils.h"
+#include "constantes_prog.h"
+#include "styles.h"
 
 
 int use_case_conversion()
 {
+    fillConsoleBackground(WHITE, BLUE);
     while (1) {
-        int n = gestion_menu_choix(Menu_Conversion, TailleMenuConversion, NameMenuConversion);
+        int n = gestion_menu_choix(Menu_Conversion, TailleMenuConversion, NameMenuConversion,
+                                   BG_COLOR_CONVERSION, COLOR_CONVERSION, BORDER_COLOR_CONVERSION);
 
         if(n != -1){
 
