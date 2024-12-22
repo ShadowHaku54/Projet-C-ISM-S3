@@ -36,6 +36,7 @@ static void display_menu(const char *tabMenu[], int tailleMenu,
                   int borderColor, int delayMs, int largeurMenu)
 {
     setConsoleColor(borderColor, fontColor);
+    printf("\n");
     print_ligne("╔", "═", "╗", largeurMenu);
     print_ligne("║", " ", "║", largeurMenu);
 

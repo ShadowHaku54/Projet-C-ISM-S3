@@ -6,15 +6,17 @@
 #include "vider_tampon.h"
 #include "gestions_str.h"
 #include "constantes_prog.h"
-#include "constantes_prog.h"
+#include "styles.h"
 
 
 
 char *input(char *sms, const int max_size)
 {
     char TMP[max_size];
-    printf("\n");
+    printf("\n\n");
+    print_ligne_spaces(MARGE_2);
     printf("%s\n", sms);
+    print_ligne_spaces(MARGE_2);
     printf(">%s",  TAB);
 
     do{

@@ -4,13 +4,13 @@
 int convertir_car_en_decimal(char num)
 {
     if (isNumber(num)){
-        return num - 48;
+        return num - '0';
     }
     else if (isAlphabetMaj(num)){
-        return num - 65 + 10;
+        return num - 'A' + 10;
     }
     else if (isAlphabetMins(num)){
-        return num - 97 + 10;
+        return num - 'a' + 10;
     }
     return -1;
 }

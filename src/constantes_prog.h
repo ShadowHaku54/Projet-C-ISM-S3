@@ -10,6 +10,7 @@
 #define SCREEM 40
 #define LARGEUR 40
 #define MARGE_1 30
+#define MARGE_2 3
 
 #define DELAIS_MS 50
 #define VRAI 1
@@ -18,10 +19,6 @@
 #define MIN_BASE 2
 #define PRECISION_FLOAT 20
 
-#define COLOR_BORDER_DEFAULT 7  // Blanc
-#define COLOR_BORDER_HIGHLIGHT 14 // Jaune
-#define COLOR_TEXT_DEFAULT 15 // Blanc brillant
-#define COLOR_TEXT_HIGHLIGHT 12 // Rouge
 
 #define BG_COLOR_SHIFT 4
 
@@ -43,13 +40,14 @@
 #define LIGHT_YELLOW  14
 #define BRIGHT_WHITE  15
 
+
 #define COLOR_MAIN            WHITE
 #define BG_COLOR_MAIN         LIGHT_BLUE
 #define BORDER_COLOR_MAIN     BLUE
 
-#define COLOR_TEXT_PRIMARY    BLACK
-#define BG_COLOR_PAGE_CONVERTIR   BRIGHT_WHITE
-#define BORDER_COLOR_PAGE_CONVERTIR RED
+#define COLOR_TEXT_DEFAULT    BLACK
+#define BG_COLOR_DEFAULT      BRIGHT_WHITE
+#define BORDER_COLOR_DEFAULT  RED
 
 #define COLOR_CONVERSION      LIGHT_CYAN
 #define BG_COLOR_CONVERSION   BLUE

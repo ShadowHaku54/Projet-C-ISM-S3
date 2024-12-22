@@ -16,13 +16,13 @@ const int Standar_Tab_Base[] ={2, 10, 8, 16};
 
 void underUseCase_saisieEtconversion(int statut, int n)
 {
-    fillConsoleBackground(COLOR_TEXT_PRIMARY, BG_COLOR_PAGE_CONVERTIR);
-    setConsoleColor(COLOR_TEXT_PRIMARY, BG_COLOR_PAGE_CONVERTIR);
+    fillConsoleBackground(COLOR_TEXT_DEFAULT, BG_COLOR_DEFAULT);
+    setConsoleColor(COLOR_TEXT_DEFAULT, BG_COLOR_DEFAULT);
     do{
         int base_depart = (statut) ? Standar_Tab_Base[n] : 2;
         int base_arrive = (statut) ? 2 : Standar_Tab_Base[n];
 
-        afficher_tables(base_depart, base_arrive, BG_COLOR_PAGE_CONVERTIR, COLOR_TEXT_PRIMARY, BORDER_COLOR_PAGE_CONVERTIR, MARGE_1);
+        afficher_tables_bases(base_depart, base_arrive);
 
         char *nombre_saisie = input_data_type_int("SAISIR LE NOMBRE:");
 
@@ -56,12 +56,14 @@ void process_conversion(int base_depart, int base_arrive, char *nombre_saisie)
         if (after != NULL){
             after_converti = convert_all_base_partFract(base_depart, base_arrive, after, PRECISION_FLOAT);
             if (after_converti != NULL){
-                printf("(%c%s.%s)Base%d vaut (%c%s.%s)Base%d\n", Sneg, before, after, base_depart, Sneg, before_converti, after_converti, base_arrive);
+                printf("%s %s", before_converti, after_converti);
+                afficher_resultat_apres_conversion(base_depart, base_arrive, Sneg, before, after, before_converti, after_converti);
             } else {
                 printf("DÉSOLÉ ! LE NOMBRE SAISIT N'APPARTIENT PAS À LA BASE %d\n", base_depart);
             }
         } else {
-            printf("(%c%s)Base%d vaut (%c%s)Base%d\n", Sneg, before, base_depart, Sneg, before_converti, base_arrive);
+            printf("%s %s", before_converti, after_converti);
+            afficher_resultat_apres_conversion(base_depart, base_arrive, Sneg, before, after, before_converti, after_converti);
         }
     } else {
         printf("DÉSOLÉ ! LE NOMBRE SAISIT N'APPARTIENT PAS À LA BASE %d\n", base_depart);
@@ -75,22 +77,22 @@ void process_conversion(int base_depart, int base_arrive, char *nombre_saisie)
 
 void UseCase_personalise()
 {
-    fillConsoleBackground(COLOR_TEXT_PRIMARY, BG_COLOR_PAGE_CONVERTIR);
-    setConsoleColor(COLOR_TEXT_PRIMARY, BG_COLOR_PAGE_CONVERTIR);
+    fillConsoleBackground(COLOR_TEXT_DEFAULT, BG_COLOR_DEFAULT);
+    setConsoleColor(COLOR_TEXT_DEFAULT, BG_COLOR_DEFAULT);
     do{
-        afficher_tables(-1, -1, BG_COLOR_PAGE_CONVERTIR, COLOR_TEXT_PRIMARY, BORDER_COLOR_PAGE_CONVERTIR, MARGE_1);
+        afficher_tables_bases(-1, -1);
 
         int base_depart = saisie_small_number("Entrer la base de départ: ");
         if (base_depart == -1 || !view_check_base(base_depart)){
             continue;
         }
-        afficher_tables(base_depart, -1, BG_COLOR_PAGE_CONVERTIR, COLOR_TEXT_PRIMARY, BORDER_COLOR_PAGE_CONVERTIR, MARGE_1);
+        afficher_tables_bases(base_depart, -1);
 
         int base_arrive = saisie_small_number("Entrer la base de d'arrivé: ");
         if (base_arrive == -1 || !view_check_base(base_arrive)){
             continue;
         }
-        afficher_tables(base_depart, base_arrive, BG_COLOR_PAGE_CONVERTIR, COLOR_TEXT_PRIMARY, BORDER_COLOR_PAGE_CONVERTIR, MARGE_1);
+        afficher_tables_bases(base_depart, base_arrive);
 
         if (base_depart == base_arrive){
             puts("Veuillez saisir une base de départ différente de la base d'arrivée!");

@@ -57,45 +57,45 @@ void fillConsoleBackground(int textColor, int backgroundColor)
     SetConsoleCursorPosition(hConsole, (COORD){0, 0});
 }
 
-void afficher_tables(int base_depart, int base_arrive, int fontColor, int textColor, int borderColor, int marge)
+void afficher_tables_bases(int base_depart, int base_arrive)
 {
     system("cls");
     printf("\n");
 
-    setConsoleColor(borderColor, fontColor);
-    print_ligne_spaces(marge);
+    setConsoleColor(BORDER_COLOR_DEFAULT, BG_COLOR_DEFAULT);
+    print_ligne_spaces(MARGE_1);
     printf("╔════════════════╗                  ╔════════════════╗\n");
-    print_ligne_spaces(marge);
+    print_ligne_spaces(MARGE_1);
     printf("║ ");
 
-    setConsoleColor(textColor, fontColor);
+    setConsoleColor(COLOR_TEXT_DEFAULT, BG_COLOR_DEFAULT);
     printf("Base de départ");
 
-    setConsoleColor(borderColor, fontColor);
+    setConsoleColor(BORDER_COLOR_DEFAULT, BG_COLOR_DEFAULT);
     printf(" ║        TO        ║ ");
 
-    setConsoleColor(textColor, fontColor);
+    setConsoleColor(COLOR_TEXT_DEFAULT, BG_COLOR_DEFAULT);
     printf("Base d'arrivée");
 
-    setConsoleColor(borderColor, fontColor);
+    setConsoleColor(BORDER_COLOR_DEFAULT, BG_COLOR_DEFAULT);
     printf(" ║\n");
-    print_ligne_spaces(marge);
+    print_ligne_spaces(MARGE_1);
     printf("╠════════════════╣                  ╠════════════════╣\n");
-    print_ligne_spaces(marge);
+    print_ligne_spaces(MARGE_1);
     printf("║");
 
-    setConsoleColor(textColor, fontColor);
+    setConsoleColor(COLOR_TEXT_DEFAULT, BG_COLOR_DEFAULT);
     if (base_depart != -1) {
         int cc = ((base_depart/10) == 0) ? 1 : 0;
         printf("%*s%d%*s", 7, "", base_depart, 7+cc, "");
     } else {
         printf("%*s", 16, " ");
     }
-    setConsoleColor(borderColor, fontColor);
+    setConsoleColor(BORDER_COLOR_DEFAULT, BG_COLOR_DEFAULT);
     printf("║                  ");
 
     printf("║");
-    setConsoleColor(textColor, fontColor);
+    setConsoleColor(COLOR_TEXT_DEFAULT, BG_COLOR_DEFAULT);
     if (base_arrive != -1) {
         int cc = (base_arrive / 10) == 0 ? 1 : 0;
         printf("%*s%d%*s", 7, "", base_arrive, 7+cc, "");
@@ -103,10 +103,118 @@ void afficher_tables(int base_depart, int base_arrive, int fontColor, int textCo
         printf("%*s", 16, " ");
     }
 
-    setConsoleColor(borderColor, fontColor);
+    setConsoleColor(BORDER_COLOR_DEFAULT, BG_COLOR_DEFAULT);
     printf("║\n");
-    print_ligne_spaces(marge);
+    print_ligne_spaces(MARGE_1);
     printf("╚════════════════╝                  ╚════════════════╝\n\n\n");
 
-    setConsoleColor(textColor, fontColor);
+    setConsoleColor(COLOR_TEXT_DEFAULT, BG_COLOR_DEFAULT);
+}
+
+
+void afficher_resultat_apres_conversion(int base_depart, int base_arrive, char Sneg, const char *before, const char *after,
+                                        const char *before_convertie, const char *after_convertie)
+{
+    system("cls");
+    const int local_color_text = COLOR_TEXT_DEFAULT;
+    const int local_color_border = BORDER_COLOR_DEFAULT;
+    const int background = BG_COLOR_DEFAULT;
+
+    int point;
+
+    int signe_neg = (Sneg == '-')? 1:0;
+
+    int len_depart = strlen(before) + signe_neg;
+    if (after != NULL){
+        len_depart += strlen(after);
+    }
+
+    int len_arrive = strlen(before_convertie) + signe_neg;
+    if (after_convertie != NULL){
+        len_arrive += strlen(after_convertie);
+    }
+
+    int taille_col_3 = len_depart > len_arrive ? len_depart : len_arrive;
+    taille_col_3 += 4;
+
+    printf("\n\n\n\n\n");
+    print_ligne_spaces(SCREEM + MARGE_1/2 - 7);
+    setConsoleColor(GREEN, background);
+    printf("RESULTAT");
+    setConsoleColor(local_color_border, background);
+    printf("\n");
+    print_ligne_spaces(MARGE_1);
+    printf("╔════════════╦════════════════╦");
+    for (int i = 0; i < taille_col_3; i++) printf("═");
+    printf("╗\n");
+
+    print_ligne_spaces(MARGE_1);
+    printf("║   ");
+
+    setConsoleColor(local_color_text, background);
+    printf("DEPART");
+
+    setConsoleColor(local_color_border, background);
+    printf("   ║    ");
+
+    setConsoleColor(local_color_text, background);
+    printf("Base %-2d", base_depart);
+
+    setConsoleColor(local_color_border, background);
+    printf("     ║ ");
+
+    setConsoleColor(local_color_text, background);
+    if (signe_neg) printf("-");
+    affiche_lettre_par_lettre(before, DELAIS_MS);
+
+    point = 0;
+    if (after != NULL){
+        printf(".");
+        point= 1;
+        affiche_lettre_par_lettre(after, DELAIS_MS);
+    }
+
+    setConsoleColor(local_color_border, background);
+    printf("%*s║\n", (taille_col_3 - len_depart -point -1), "");
+
+    print_ligne_spaces(MARGE_1);
+    printf("╠════════════╬════════════════╬");
+    print_ligne_char(taille_col_3, "═");
+    printf("╣\n");
+
+    print_ligne_spaces(MARGE_1);
+    printf("║   ");
+
+    setConsoleColor(local_color_text, background);
+    printf("ARRIVE");
+
+    setConsoleColor(local_color_border, background);
+    printf("   ║    ");
+
+    setConsoleColor(local_color_text, background);
+    printf("Base %-2d", base_arrive);
+
+    setConsoleColor(local_color_border, background);
+    printf("     ║ ");
+
+    setConsoleColor(local_color_text, background);
+    if (signe_neg) printf("-");
+    affiche_lettre_par_lettre(before_convertie, DELAIS_MS);
+
+    point = 0;
+    if (after_convertie != NULL){
+        point = 1;
+        printf(".");
+        affiche_lettre_par_lettre(after_convertie, DELAIS_MS);
+    }
+
+    setConsoleColor(local_color_border, background);
+    printf("%*s║\n", (taille_col_3 - len_arrive - point -1), "");
+
+    print_ligne_spaces(MARGE_1);
+    printf("╚════════════╩════════════════╩");
+    print_ligne_char(taille_col_3, "═");
+    printf("╝\n");
+
+    setConsoleColor(local_color_text, background);
 }
