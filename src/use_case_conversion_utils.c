@@ -9,12 +9,39 @@
 #include "saisie_small_number.h"
 #include "constantes_prog.h"
 #include "styles.h"
-#include <windows.h>
 #include "page_error.h"
+#include "gestion_menu_choix.h"
+#include "enregistrer_historique.h"
 
 const int Standar_Tab_Base[] ={2, 10, 8, 16};
 
 static char message[90];
+
+
+int useCase_codage_or_transcodage(const char *tabMenu[], int N, int statut, const char *Title)
+{
+    int color = (statut) ? COLOR_CODAGE : COLOR_DECODAGE;
+    int bgcolor = (statut) ? BG_COLOR_CODAGE : BG_COLOR_DECODAGE;
+    int bordercolor = (statut) ? BORDER_COLOR_CODAGE : BORDER_COLOR_DECODAGE;
+    while (1){
+        int n = gestion_menu_choix(tabMenu, N, Title, color, bgcolor, bordercolor);
+
+        if(n != -1){
+
+            if (n == N){
+                return 0;
+            }
+            else if (n == N-1){
+                return 1;
+            }
+
+            underUseCase_saisieEtconversion(statut, n);
+        } else {
+            snprintf(message, sizeof(message), "DÉSOLÉ ! SAISIR UN NOMBRE ENTRE 1 et %d", N);
+            page_error(message);
+        }
+    };
+}
 
 void underUseCase_saisieEtconversion(int statut, int n)
 {
@@ -29,6 +56,8 @@ void underUseCase_saisieEtconversion(int statut, int n)
         char *nombre_saisie = input_data_type_int("SAISIR LE NOMBRE:");
 
         if (view_char_isNull_after_input(nombre_saisie)){
+            fillConsoleBackground(COLOR_TEXT_DEFAULT, BG_COLOR_DEFAULT);
+            setConsoleColor(COLOR_TEXT_DEFAULT, BG_COLOR_DEFAULT);
             continue;
         }
 
@@ -60,15 +89,17 @@ void process_conversion(int base_depart, int base_arrive, char *nombre_saisie)
             if (after_converti != NULL){
                 printf("%s %s", before_converti, after_converti);
                 afficher_resultat_apres_conversion(base_depart, base_arrive, Sneg, before, after, before_converti, after_converti);
+                enregistrer_historique(base_depart, base_arrive, before, after, Sneg, before_converti, after_converti);
             } else {
                 snprintf(message, sizeof(message), "DÉSOLÉ ! LE NOMBRE SAISIT N'APPARTIENT PAS À LA BASE %d", base_depart);
                 page_error(message);
+                fillConsoleBackground(COLOR_TEXT_DEFAULT, BG_COLOR_DEFAULT);
+                setConsoleColor(COLOR_TEXT_DEFAULT, BG_COLOR_DEFAULT);
             }
         } else {
             printf("%s %s", before_converti, after_converti);
             afficher_resultat_apres_conversion(base_depart, base_arrive, Sneg, before, after, before_converti, after_converti);
-            fillConsoleBackground(COLOR_TEXT_DEFAULT, BG_COLOR_DEFAULT);
-            setConsoleColor(COLOR_TEXT_DEFAULT, BG_COLOR_DEFAULT);
+            enregistrer_historique(base_depart, base_arrive, before, after, Sneg, before_converti, after_converti);
         }
     } else {
         snprintf(message, sizeof(message), "DÉSOLÉ ! LE NOMBRE SAISIT N'APPARTIENT PAS À LA BASE %d", base_depart);
@@ -104,20 +135,22 @@ void UseCase_personalise()
 
         if (base_depart == base_arrive){
             page_error("VEUILLEZ SAISIR UNE BASE DE DEPART DIFFERENTE DE LA BASE D'ARRIVEE!");
+            fillConsoleBackground(COLOR_TEXT_DEFAULT, BG_COLOR_DEFAULT);
+            setConsoleColor(COLOR_TEXT_DEFAULT, BG_COLOR_DEFAULT);
             continue;
         }
 
         char *nombre_saisie = input_data_type_int("Saisir le nombre:");
 
-        if (nombre_saisie == NULL){
-            puts("Erreur lors de la saisie. \nValeur trop grande ou comportement inantendue! \nRéessayer!\n");
-            libere_alloue(&nombre_saisie);
-
-        } else {
-            process_conversion(base_depart, base_arrive, nombre_saisie);
-            libere_alloue(&nombre_saisie);
+        if (view_char_isNull_after_input(nombre_saisie)){
+            fillConsoleBackground(COLOR_TEXT_DEFAULT, BG_COLOR_DEFAULT);
+            setConsoleColor(COLOR_TEXT_DEFAULT, BG_COLOR_DEFAULT);
+            continue;
         }
 
+        process_conversion(base_depart, base_arrive, nombre_saisie);
+        libere_alloue(&nombre_saisie);
 
-    }while(confirmer("Voulez vous continuer à convertir? (o/n)"));
+
+    }while(confirmer("VOULEZ VOUS CONTINUEZ A CONVERTIR? (O/N)"));
 }

@@ -9,7 +9,7 @@
 int view_char_isNull_after_input(char *value)
 {
     if (value == NULL){
-        page_error("ERREUR LORS DE LA SAISIE. \n\tVALEUR TROP GRANDE OU COMPORTEMENT INANTENDUE!");
+        page_error("VALEUR TROP GRANDE OU COMPORTEMENT INANTENDUE!");
         return 1;
     }
     return 0;
@@ -18,7 +18,7 @@ int view_char_isNull_after_input(char *value)
 int view_char_is_number(char *value)
 {
     if(!char_is_number(value)){
-        page_error("ERREUR! DESOLE VEUILLEZ SAISIR UN ENTIER!");
+        page_error("DESOLE VEUILLEZ SAISIR UN ENTIER!");
         return 0;
     }
     return 1;

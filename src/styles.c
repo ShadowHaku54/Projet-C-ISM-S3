@@ -120,18 +120,17 @@ void afficher_resultat_apres_conversion(int base_depart, int base_arrive, char S
     const int local_color_border = BORDER_COLOR_DEFAULT;
     const int background = BG_COLOR_DEFAULT;
 
-    int point;
 
     int signe_neg = (Sneg == '-')? 1:0;
 
     int len_depart = strlen(before) + signe_neg;
     if (after != NULL){
-        len_depart += strlen(after);
+        len_depart += strlen(after) + 1;
     }
 
     int len_arrive = strlen(before_convertie) + signe_neg;
     if (after_convertie != NULL){
-        len_arrive += strlen(after_convertie);
+        len_arrive += strlen(after_convertie) + 1;
     }
 
     int taille_col_3 = len_depart > len_arrive ? len_depart : len_arrive;
@@ -168,15 +167,13 @@ void afficher_resultat_apres_conversion(int base_depart, int base_arrive, char S
     if (signe_neg) printf("-");
     affiche_lettre_par_lettre(before, DELAIS_MS);
 
-    point = 0;
     if (after != NULL){
         printf(".");
-        point= 1;
         affiche_lettre_par_lettre(after, DELAIS_MS);
     }
 
     setConsoleColor(local_color_border, background);
-    printf("%*s║\n", (taille_col_3 - len_depart -point -1), "");
+    printf("%*s║\n", (taille_col_3 - len_depart -1), "");
 
     print_ligne_spaces(MARGE_1);
     printf("╠════════════╬════════════════╬");
@@ -202,15 +199,13 @@ void afficher_resultat_apres_conversion(int base_depart, int base_arrive, char S
     if (signe_neg) printf("-");
     affiche_lettre_par_lettre(before_convertie, DELAIS_MS);
 
-    point = 0;
     if (after_convertie != NULL){
-        point = 1;
         printf(".");
         affiche_lettre_par_lettre(after_convertie, DELAIS_MS);
     }
 
     setConsoleColor(local_color_border, background);
-    printf("%*s║\n", (taille_col_3 - len_arrive - point -1), "");
+    printf("%*s║\n", (taille_col_3 - len_arrive -1), "");
 
     print_ligne_spaces(MARGE_1);
     printf("╚════════════╩════════════════╩");

@@ -17,7 +17,7 @@ int saisie_small_number(char *sms)
         return -1;
     }
 
-    int b = atoi(base);
+    int n = atoi(base);
     libere_alloue(&base);
-    return b;
+    return n;
 }

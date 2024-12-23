@@ -23,8 +23,14 @@ void page_error(char *message)
     setConsoleColor(GRAY, WHITE);
     print_ligne_spaces(MARGE_2);
 
+    Beep(400, 300);
     affiche_lettre_par_lettre("Appuyer pour continuer", DELAIS_MS);
-    affiche_lettre_par_lettre("...", DELAIS_MS+1000);
+    Beep(400, 300);
+    printf(".");
+    Beep(400, 300);
+    printf(".");
+    Beep(400, 300);
+    printf(".");
 
     getchar();
 

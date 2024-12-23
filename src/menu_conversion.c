@@ -6,9 +6,7 @@ const char *Menu_Conversion[] = {
     "CODAGE",
     "DECODAGE",
     "PERSONALISER",
-    "CODAGE EN COMPLEMENT A DEUX",
     "HISTORIQUE",
-    "RETOUR",
     "QUITTER",
 };
 

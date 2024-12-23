@@ -20,6 +20,7 @@ char *input(char *sms, const int max_size)
     printf(">%s",  TAB);
 
     do{
+        print_ligne_spaces(MARGE_2);
         if (fgets(TMP, max_size, stdin) == NULL){
             return NULL;
         }

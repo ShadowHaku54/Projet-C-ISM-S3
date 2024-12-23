@@ -35,11 +35,13 @@ static void display_menu(const char *tabMenu[], int tailleMenu,
                   const char *titreMenu, int fontColor, int textColor,
                   int borderColor, int delayMs, int largeurMenu)
 {
+    int freq = 1800;
     setConsoleColor(borderColor, fontColor);
     printf("\n");
     print_ligne("╔", "═", "╗", largeurMenu);
     print_ligne("║", " ", "║", largeurMenu);
 
+    Beep(freq, DELAIS_MS);
     int titreLen = strlen(titreMenu);
     int padding = (largeurMenu - titreLen) / 2;
 
@@ -57,7 +59,9 @@ static void display_menu(const char *tabMenu[], int tailleMenu,
     print_ligne("║", " ", "║", largeurMenu);
     print_ligne("╠", "═", "╣", largeurMenu);
 
+    Beep(freq, DELAIS_MS);
     for (int i = 0; i < tailleMenu ; i++) {
+        Beep(freq, DELAIS_MS);
         setConsoleColor(borderColor, fontColor);
         int optionLen = snprintf(NULL, 0, " %d ⮞ %s", i + 1, tabMenu[i]);
 

@@ -20,7 +20,7 @@ int confirmer(char *sms)
             non_ok = (c != 'n' && c !='o' && c != '\0' && c != 'O' && c != 'N');
 
             if(non_ok){
-                puts("Mauvaise saisie!\n");
+                puts("\tMauvaise saisie!\n");
             }
         }
 
